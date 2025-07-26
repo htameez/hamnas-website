@@ -18,14 +18,12 @@ const Content = () => {
   const [showContent, setShowContent] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
 
-  // Detect scroll direction
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > prevScrollY ? "down" : "up";
     setScrollDirection(direction);
     setPrevScrollY(latest);
   });
 
-  // Wait for user to scroll past threshold
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (progress) => {
       setShowContent(progress > 0.8);
@@ -39,16 +37,16 @@ const Content = () => {
     mass: 1,
   });
 
-  // Bird movement only starts when content is active
   const birdProgress = useTransform(
     smoothProgress,
     [0.8, 1],
     showContent ? [0, 1] : [0, 0],
     { clamp: true }
   );
-  const birdX = useTransform(birdProgress, [0, 1], ["-20vw", "120vw"], { clamp: true });
+  const birdX = useTransform(birdProgress, [0, 1], ["-20vw", "120vw"], {
+    clamp: true,
+  });
 
-  // Set animation finished only when bird progresses far enough
   useEffect(() => {
     const unsubscribe = birdProgress.on("change", (progress) => {
       if (progress >= 0.9 && scrollDirection === "down") {
@@ -60,12 +58,17 @@ const Content = () => {
     return unsubscribe;
   }, [birdProgress, scrollDirection]);
 
-  // Element transforms
   const titleY = useTransform(birdProgress, [0, 0.3], [100, 0], { clamp: true });
-  const titleOpacity = useTransform(birdProgress, [0, 0.3], [0, 1], { clamp: true });
+  const titleOpacity = useTransform(birdProgress, [0, 0.3], [0, 1], {
+    clamp: true,
+  });
 
-  const descriptionY = useTransform(birdProgress, [0.2, 0.5], [100, 0], { clamp: true });
-  const descriptionOpacity = useTransform(birdProgress, [0.2, 0.5], [0, 1], { clamp: true });
+  const descriptionY = useTransform(birdProgress, [0.2, 0.5], [100, 0], {
+    clamp: true,
+  });
+  const descriptionOpacity = useTransform(birdProgress, [0.2, 0.5], [0, 1], {
+    clamp: true,
+  });
 
   const buttonData = [
     { text: "PORTFOLIO", target: "portfolio" },
@@ -74,14 +77,19 @@ const Content = () => {
     { text: "CONTACT", target: "contact" },
   ];
 
-  const buttonTransforms = buttonData.map((_, index) => {
-    const start = 0.1 + index * 0.1;
-    const end = 0.3 + index * 0.1;
-    return {
-      opacity: useTransform(birdProgress, [start, end], [0, 1], { clamp: true }),
-      translateY: useTransform(birdProgress, [start, end], [50, 0], { clamp: true }),
-    };
-  });
+  const buttonOpacities = [
+    useTransform(birdProgress, [0.1, 0.3], [0, 1], { clamp: true }),
+    useTransform(birdProgress, [0.2, 0.4], [0, 1], { clamp: true }),
+    useTransform(birdProgress, [0.3, 0.5], [0, 1], { clamp: true }),
+    useTransform(birdProgress, [0.4, 0.6], [0, 1], { clamp: true }),
+  ];
+
+  const buttonTranslateYs = [
+    useTransform(birdProgress, [0.1, 0.3], [50, 0], { clamp: true }),
+    useTransform(birdProgress, [0.2, 0.4], [50, 0], { clamp: true }),
+    useTransform(birdProgress, [0.3, 0.5], [50, 0], { clamp: true }),
+    useTransform(birdProgress, [0.4, 0.6], [50, 0], { clamp: true }),
+  ];
 
   const handleScroll = (id: string) => {
     const section = document.getElementById(id);
@@ -145,13 +153,16 @@ const Content = () => {
             <motion.div
               key={btn.text}
               style={{
-                opacity: buttonTransforms[index].opacity,
-                translateY: buttonTransforms[index].translateY,
+                opacity: buttonOpacities[index],
+                translateY: buttonTranslateYs[index],
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <CustomButton text={btn.text} onClick={() => handleScroll(btn.target)} />
+              <CustomButton
+                text={btn.text}
+                onClick={() => handleScroll(btn.target)}
+              />
             </motion.div>
           ))}
         </div>
@@ -220,22 +231,22 @@ const Content = () => {
             <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
               {buttonData[i].text}
             </h2>
-            <p>
-              {id === "portfolio"
-                ? (<div>
-                  <ContentCard
-                    image="/images/carebuddy.png"
-                    title="CareBuddy"
-                    githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
-                    style={{ width: "250px", height: "auto" }}
-                  />
-                </div>)
-                : id === "blog"
+            {id === "portfolio" ? (
+              <ContentCard
+                image="/images/carebuddy.png"
+                title="CareBuddy"
+                githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
+                style={{ width: "250px", height: "auto" }}
+              />
+            ) : (
+              <p>
+                {id === "blog"
                   ? "Your thoughts and writings..."
                   : id === "about"
-                    ? "Your story and background..."
-                    : "Contact form or details here..."}
-            </p>
+                  ? "Your story and background..."
+                  : "Contact form or details here..."}
+              </p>
+            )}
           </div>
         </div>
       ))}
