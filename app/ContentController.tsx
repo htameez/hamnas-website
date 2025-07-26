@@ -24,7 +24,7 @@ export default function ContentController() {
     const bgFilter = useTransform(bgBlurValue, (val) => `blur(${val}px)`);
     const frameScale = useTransform(smoothProgress, [0, 0.5], [0.8, 6]);
     const greenOpacity = useTransform(smoothProgress, [0.6, 0.8], [0, 1]);
-    const creatureScale = useTransform(smoothProgress, [0, 0.5], [1, 10]);
+    const creatureScale = useTransform(smoothProgress, [0, 0.5], [1.4, 10]);
 
     const [isContentActive, setIsContentActive] = useState(false);
   
