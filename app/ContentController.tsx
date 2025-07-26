@@ -22,9 +22,10 @@ export default function ContentController() {
     const bgScale = useTransform(smoothProgress, [0, 0.5], [1, 8]);
     const bgBlurValue = useTransform(smoothProgress, [0.4, 0.6], [0, 20]);
     const bgFilter = useTransform(bgBlurValue, (val) => `blur(${val}px)`);
-    const frameScale = useTransform(smoothProgress, [0, 0.5], [0.8, 5]);
+    const frameScale = useTransform(smoothProgress, [0, 0.5], [0.8, 6]);
     const greenOpacity = useTransform(smoothProgress, [0.6, 0.8], [0, 1]);
-  
+    const creatureScale = useTransform(smoothProgress, [0, 0.5], [1, 10]);
+
     const [isContentActive, setIsContentActive] = useState(false);
   
     // Track when content becomes active
@@ -170,7 +171,7 @@ export default function ContentController() {
                     src="/images/home-creatures.png"
                     alt="Combined"
                     style={{
-                        scale: frameScale,
+                        scale: creatureScale,
                         width: "auto",
                         height: "auto",
                     }}
