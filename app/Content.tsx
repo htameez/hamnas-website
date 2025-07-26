@@ -9,6 +9,7 @@ import {
   useSpring,
   useMotionValueEvent,
 } from "framer-motion";
+import ContentCard from "./components/ContentCard";
 
 const Content = () => {
   const { scrollYProgress, scrollY } = useScroll();
@@ -221,7 +222,14 @@ const Content = () => {
             </h2>
             <p>
               {id === "portfolio"
-                ? "Your amazing work goes here..."
+                ? (<div>
+                  <ContentCard
+                    image="/images/carebuddy.png"
+                    title="CareBuddy"
+                    githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
+                    style={{ width: "250px", height: "auto" }}
+                  />
+                </div>)
                 : id === "blog"
                   ? "Your thoughts and writings..."
                   : id === "about"
