@@ -140,7 +140,7 @@ export default function ContentController() {
                                     color: "#454525",
                                 }}
                             >
-                                HAMNA TAMEEZ'S
+                                HAMNA TAMEEZ&apos;S
                             </div>
                             <div
                                 style={{
