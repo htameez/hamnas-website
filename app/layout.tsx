@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 // Optional: You can define global metadata here
 export const metadata: Metadata = {
-  title: "Hamna Tameez Portfolio",
+  title: "Hamna's Website",
   description: "Scroll-activated single page portfolio site by Hamna Tameez",
 };
 

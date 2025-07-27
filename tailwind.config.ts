@@ -19,6 +19,7 @@ const config: Config = {
                     alt1: '#9a9d6c',
                     alt2: '#c5ca91',
                     alt3: '#a8ab7a',
+                    alt4: '#ded2bc'
                 },
             },
         },
