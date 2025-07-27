@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import CustomButton from "./components/CustomButton";
+import PhotoFrame from "./components/PhotoFrame";
 import {
     motion,
     useScroll,
@@ -11,6 +12,7 @@ import {
 } from "framer-motion";
 import ContentCard from "./components/ContentCard";
 import Image from "next/image";
+import { relative } from "path";
 
 const Content = () => {
     const { scrollYProgress, scrollY } = useScroll();
@@ -172,7 +174,14 @@ const Content = () => {
                 </div>
             )}
             {/* Intro Section */}
-            <div className="relative h-screen bg-[#b6b992] flex items-center justify-center px-8 overflow-hidden">
+            <div className="relative h-screen bg-[#b6b992] flex items-center justify-center px-8 overflow-hidden"
+                style={{
+                    backgroundImage: "url('/images/overlay.jpeg')",
+                    backgroundBlendMode: "color-burn",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat"
+                }}>
                 {showContent && (
                     <>
                         {/* Fairy Image - positioned to the right of text */}
@@ -230,30 +239,95 @@ const Content = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         backgroundColor: ["#a8ab7a", "#9a9d6c", "#c5ca91", "#b6b992"][i],
+                        backgroundImage: "url('/images/overlay.jpeg')",
+                        backgroundBlendMode: "color-burn",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
                         color: "#454525",
+                        position: "relative"
                     }}
                 >
-                    <div style={{ textAlign: "center" }}>
-                        <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-                            {buttonData[i].text}
-                        </h2>
-                        {id === "portfolio" ? (
-                            <ContentCard
-                                image="/images/carebuddy.png"
-                                title="CareBuddy"
-                                githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
-                                style={{ width: "250px", height: "auto" }}
-                            />
-                        ) : (
-                            <p>
-                                {id === "blog"
-                                    ? "Coming soon..."
-                                    : id === "about"
-                                        ? "Hello! My name is Hamna, and I'm a rising senior attending Southern Methodist University in Dallas, TX."
-                                        : "Email: hamnatameez1@gmail.com"}
-                            </p>
-                        )}
-                    </div>
+                    {id === "about" ? (
+                        // Custom About Section Layout
+                        <div className="flex items-center justify-between w-full max-w-6xl px-8">
+                            {/* Left Side - Text Content */}
+                            <div className="flex-1 pr-12">
+                                <h2 className="text-4xl mb-6 text-left">ABOUT ME</h2>
+                                <p className="text-lg leading-relaxed text-left max-w-md">
+                                    Hello! My name is Hamna, and I'm a rising senior attending Southern Methodist University in Dallas, TX. I love to code, write poetry, and travel!
+                                </p>
+                            </div>
+                            
+                            {/* Right Side - Photo Frames */}
+                            <div className="flex-1 relative flex justify-center">
+                                <div className="relative right-20">
+                                    {/* First Photo Frame - slightly above and skewed */}
+                                    <div className="absolute -top-8 left-0 w-[80%] transform rotate-3">
+                                        <PhotoFrame 
+                                            image="/images/silver.png"
+                                        />
+                                    </div>
+                                    
+                                    {/* Second Photo Frame - slightly below and skewed opposite */}
+                                    <div className="relative top-16 left-40 transform -rotate-2">
+                                        <PhotoFrame 
+                                            image="/images/hamna.png"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        // Default layout for other sections
+                        <div style={{ textAlign: "center"}}>
+                            {/* Portfolio Image - positioned on the left edge */}
+                            {id === "portfolio" && (
+                                <Image
+                                    src="/images/horse.png"
+                                    alt="horse"
+                                    width={516}
+                                    height={250}
+                                    className="absolute pointer-events-none left-10 z-10"
+                                />
+                            )}
+                            
+                            {/* Blog Image - positioned on the right edge */}
+                            {id === "blog" && (
+                                <Image
+                                    src="/images/fairy2.png"
+                                    alt="fairy"
+                                    width={486}
+                                    height={550}
+                                    className="absolute pointer-events-none z-10"
+                                    style={{
+                                        right: 0,
+                                        transform: "translateY(-43.5%) scaleX(-1)"
+                                    }}
+                                />
+                            )}
+                            
+                            <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
+                                {buttonData[i].text}
+                            </h2>
+                            {id === "portfolio" ? (
+                                <ContentCard
+                                    image="/images/carebuddy.png"
+                                    title="CareBuddy"
+                                    githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
+                                    style={{ width: "250px", height: "auto" }}
+                                />
+                            ) : (
+                                <p>
+                                    {id === "blog"
+                                        ? "Coming soon..."
+                                        : id === "contact"
+                                            ? "Email: hamnatameez1@gmail.com"
+                                            : ""}
+                                </p>
+                            )}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

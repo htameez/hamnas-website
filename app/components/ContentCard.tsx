@@ -9,11 +9,11 @@ interface ContentCardProps {
 
 const ContentCard = ({ image, title, githubLink }: ContentCardProps) => {
   return (
-    <div className="bg-[#d4c9b4] border border-[#454525] rounded-lg shadow-md p-4 my-4 transition-transform hover:-translate-y-1 hover:shadow-lg">
+    <div className="bg-[#ffffff] shadow-md p-4 my-4 transition-transform hover:-translate-y-1 hover:shadow-lg">
       <img
         src={image}
         alt={title}
-        className="w-60 h-auto rounded mb-3 object-cover"
+        className="w-60 h-auto mb-3 object-cover"
       />
       <div>
         <h3 className="text-xl text-[#454525] mb-2">{title}</h3>
