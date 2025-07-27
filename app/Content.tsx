@@ -12,7 +12,6 @@ import {
 } from "framer-motion";
 import ContentCard from "./components/ContentCard";
 import Image from "next/image";
-import { relative } from "path";
 
 const Content = () => {
     const { scrollYProgress, scrollY } = useScroll();
@@ -255,7 +254,7 @@ const Content = () => {
                             <div className="flex-1 pr-12">
                                 <h2 className="text-4xl mb-6 text-left">ABOUT ME</h2>
                                 <p className="text-lg leading-relaxed text-left max-w-md">
-                                    Hello! My name is Hamna, and I'm a rising senior attending Southern Methodist University in Dallas, TX. I love to code, write poetry, and travel!
+                                    Hello! My name is Hamna, and I&apos;m a rising senior attending Southern Methodist University in Dallas, TX. I have a cat named Silver who I love so much. I also love to code, write poetry, and travel!
                                 </p>
                             </div>
                             
