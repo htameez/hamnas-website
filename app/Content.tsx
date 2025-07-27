@@ -210,7 +210,7 @@ const Content = () => {
                                 }}
                                 className="text-4xl text-[#454525]"
                             >
-                                Welcome to My Site
+                                It's nice to see you!
                             </motion.h1>
 
                             <motion.p
@@ -220,8 +220,8 @@ const Content = () => {
                                 }}
                                 className="text-[#454525] text-lg leading-relaxed max-w-md mx-auto"
                             >
-                                This is a single-page scroll-activated website. Use the navigation
-                                buttons below to explore different sections.
+                                This is a single-page scroll-activated website. Feel free to use the navigation
+                                buttons below to take a look around.
                             </motion.p>
                         </div>
                     </>
