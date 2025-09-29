@@ -305,14 +305,14 @@ const Content = () => {
                                         width={510}
                                         height={560}
                                         className="absolute pointer-events-none z-10"
-                                        style={{ right: 0, transform: "translateY(-33.8%) translateX(29.7%) scaleX(-1)" }}
+                                        style={{ right: 0, transform: "translateY(-35.5%) translateX(29.7%) scaleX(-1)" }}
                                     />
 
                                     {/* Content wrapper; z-20 so it renders above background but does not affect the fairy */}
                                     <div className="relative z-20">
                                         {/* Header row with BLOG title and See more */}
                                         <div className="relative mb-4 flex items-center justify-between">
-                                            <h2 className="text-4xl font-bold">BLOG</h2>
+                                            <h2 className="text-4xl">BLOG</h2>
                                             <Link
                                                 href="/blog"
                                                 className="absolute top-70 text-sm font-medium underline underline-offset-4 hover:opacity-80"
