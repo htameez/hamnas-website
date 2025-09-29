@@ -54,7 +54,7 @@ export default async function BlogPostPage({
         alt="Heart"
         width={300}
         height={100}
-        className="absolute right-0 bottom-[50px]"
+        className="absolute right-0 bottom-50"
         priority={false}
       />
 
@@ -78,9 +78,9 @@ export default async function BlogPostPage({
               affected by HIV and AIDS. I am grateful to have helped them out with setting up their
               annual Angel Dinner.
             </p>
-
+            <br/>
             <p>Well, I&apos;ll see you in the next blog post!</p>
-
+            <br/>
             <p>H.T.</p>
           </div>
         </article>
