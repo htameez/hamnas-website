@@ -12,6 +12,9 @@ import {
 } from "framer-motion";
 import ContentCard from "./components/ContentCard";
 import Image from "next/image";
+import BlogCard from "./components/BlogCard";
+import { posts } from "./lib/posts";
+import Link from "next/link";
 
 const Content = () => {
     const { scrollYProgress, scrollY } = useScroll();
@@ -164,23 +167,23 @@ const Content = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            <CustomButton
-                                text={btn.text}
-                                onClick={() => handleScroll(btn.target)}
-                            />
+                            <CustomButton text={btn.text} onClick={() => handleScroll(btn.target)} />
                         </motion.div>
                     ))}
                 </div>
             )}
+
             {/* Intro Section */}
-            <div className="relative h-screen bg-[#b6b992] flex items-center justify-center px-8 overflow-hidden"
+            <div
+                className="relative h-screen bg-[#b6b992] flex items-center justify-center px-8 overflow-hidden"
                 style={{
                     backgroundImage: "url('/images/overlay.jpeg')",
                     backgroundBlendMode: "color-burn",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat"
-                }}>
+                    backgroundRepeat: "no-repeat",
+                }}
+            >
                 {showContent && (
                     <>
                         {/* Fairy Image - positioned to the right of text */}
@@ -195,12 +198,13 @@ const Content = () => {
                             height={0}
                             sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, (max-width: 1024px) 120px, 140px"
                             className="absolute pointer-events-none z-10
-                                w-[80px] sm:w-[100px] md:w-[120px] lg:w-[140px] h-auto
-                                left-1/2 transform -translate-x-1/4 -translate-y-12
-                                sm:left-auto sm:transform-none sm:translate-x-0 sm:translate-y-0
-                                sm:right-[10%] md:right-[15%] lg:right-[20%] xl:right-[25%]
-                                top-[31%] sm:top-[35%] sm:-translate-y-1/2"
+                    w-[80px] sm:w-[100px] md:w-[120px] lg:w-[140px] h-auto
+                    left-1/2 transform -translate-x-1/4 -translate-y-12
+                    sm:left-auto sm:transform-none sm:translate-x-0 sm:translate-y-0
+                    sm:right-[10%] md:right-[15%] lg:right-[20%] xl:right-[25%]
+                    top-[31%] sm:top-[35%] sm:-translate-y-1/2"
                         />
+
                         {/* Centered Intro Text */}
                         <div className="relative text-center space-y-6 z-10">
                             <motion.h1
@@ -220,13 +224,14 @@ const Content = () => {
                                 }}
                                 className="text-[#454525] text-lg leading-relaxed max-w-md mx-auto"
                             >
-                                This is a single-page scroll-activated website. Feel free to use the navigation
-                                buttons below to take a look around.
+                                This is a single-page scroll-activated website. Feel free to use
+                                the navigation buttons below to take a look around.
                             </motion.p>
                         </div>
                     </>
                 )}
             </div>
+
             {/* Other Sections */}
             {["portfolio", "blog", "about", "contact"].map((id, i) => (
                 <div
@@ -244,7 +249,7 @@ const Content = () => {
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                         color: "#454525",
-                        position: "relative"
+                        position: "relative",
                     }}
                 >
                     {id === "about" ? (
@@ -254,32 +259,31 @@ const Content = () => {
                             <div className="flex-1 pr-12">
                                 <h2 className="text-4xl mb-6 text-left">ABOUT ME</h2>
                                 <p className="text-lg leading-relaxed text-left max-w-md">
-                                    Hello! My name is Hamna, and I&apos;m a rising senior attending Southern Methodist University in Dallas, TX. I have a cat named Silver who I love so much. I also love to code, write poetry, and travel!
+                                    Hello! My name is Hamna, and I&apos;m a rising senior attending
+                                    Southern Methodist University in Dallas, TX. I have a cat
+                                    named Silver who I love so much. I also love to code, write
+                                    poetry, and travel!
                                 </p>
                             </div>
-                            
+
                             {/* Right Side - Photo Frames */}
                             <div className="flex-1 relative flex justify-center">
                                 <div className="relative right-20">
                                     {/* First Photo Frame - slightly above and skewed */}
                                     <div className="absolute -top-8 left-0 w-[80%] transform rotate-3">
-                                        <PhotoFrame 
-                                            image="/images/silver.png"
-                                        />
+                                        <PhotoFrame image="/images/silver.png" />
                                     </div>
-                                    
+
                                     {/* Second Photo Frame - slightly below and skewed opposite */}
                                     <div className="relative top-16 left-40 transform -rotate-2">
-                                        <PhotoFrame 
-                                            image="/images/hamna.png"
-                                        />
+                                        <PhotoFrame image="/images/hamna.png" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ) : (
                         // Default layout for other sections
-                        <div style={{ textAlign: "center"}}>
+                        <div style={{ textAlign: "center" }}>
                             {/* Portfolio Image - positioned on the left edge */}
                             {id === "portfolio" && (
                                 <Image
@@ -290,40 +294,62 @@ const Content = () => {
                                     className="absolute pointer-events-none left-10 z-10"
                                 />
                             )}
-                            
-                            {/* Blog Image - positioned on the right edge */}
-                            {id === "blog" && (
-                                <Image
-                                    src="/images/fairy2.png"
-                                    alt="fairy"
-                                    width={486}
-                                    height={550}
-                                    className="absolute pointer-events-none z-10"
-                                    style={{
-                                        right: 0,
-                                        transform: "translateY(-43.5%) scaleX(-1)"
-                                    }}
-                                />
-                            )}
-                            
-                            <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-                                {buttonData[i].text}
-                            </h2>
-                            {id === "portfolio" ? (
-                                <ContentCard
-                                    image="/images/carebuddy.png"
-                                    title="CareBuddy"
-                                    githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
-                                    style={{ width: "250px", height: "auto" }}
-                                />
+
+                            {/* BLOG custom layout */}
+                            {id === "blog" ? (
+                                <div className="relative w-full max-w-6xl mx-auto px-6">
+                                    {/* Keep the fairy exactly as before; absolute so layout doesn't move it */}
+                                    <Image
+                                        src="/images/fairy2.png"
+                                        alt="fairy"
+                                        width={510}
+                                        height={560}
+                                        className="absolute pointer-events-none z-10"
+                                        style={{ right: 0, transform: "translateY(-33.8%) translateX(29.7%) scaleX(-1)" }}
+                                    />
+
+                                    {/* Content wrapper; z-20 so it renders above background but does not affect the fairy */}
+                                    <div className="relative z-20">
+                                        {/* Header row with BLOG title and See more */}
+                                        <div className="relative mb-4 flex items-center justify-between">
+                                            <h2 className="text-4xl font-bold">BLOG</h2>
+                                            <Link
+                                                href="/blog"
+                                                className="absolute top-70 text-sm font-medium underline underline-offset-4 hover:opacity-80"
+                                            >
+                                                See more
+                                            </Link>
+                                        </div>
+
+                                        {/* Grid of latest 3 posts (right padding so cards don’t sit under the fairy) */}
+                                        <div className="pr-[140px] sm:pr-[180px] lg:pr-[220px]">
+                                            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                                                {posts.slice(0, 3).map((p) => (
+                                                    <BlogCard key={p.slug} post={p} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             ) : (
-                                <p>
-                                    {id === "blog"
-                                        ? "Coming soon..."
-                                        : id === "contact"
-                                            ? "Email: hamnatameez1@gmail.com"
-                                            : ""}
-                                </p>
+                                <>
+                                    {/* Title for non-blog sections */}
+                                    <h2 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
+                                        {buttonData[i].text}
+                                    </h2>
+
+                                    {/* Content for non-blog sections */}
+                                    {id === "portfolio" ? (
+                                        <ContentCard
+                                            image="/images/carebuddy.png"
+                                            title="CareBuddy"
+                                            githubLink="https://github.com/XINEXPORT/chatgpt-ai-healthapp.git"
+                                            style={{ width: "250px", height: "auto" }}
+                                        />
+                                    ) : id === "contact" ? (
+                                        <p>Email: hamnatameez1@gmail.com</p>
+                                    ) : null}
+                                </>
                             )}
                         </div>
                     )}
